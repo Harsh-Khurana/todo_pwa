@@ -1,33 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 import TodoFilter from "./components/TodoFilter";
 import "./App.css";
 
+const initialTodoList = () => {
+  if (localStorage.getItem("todoList")) {
+    return JSON.parse(localStorage.getItem("todoList"));
+  }
+  return [];
+};
+
 const App = () => {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(initialTodoList());
   const [todoView, setTodoView] = useState("All");
   const [themeIcon, setThemeIcon] = useState("moon");
 
   const addTodo = (todoItem) => {
-    setTodoList(todoList.concat({ value: todoItem, completed: false }));
+    const updateTodoList = todoList.concat({
+      value: todoItem,
+      completed: false,
+    });
+    setTodoList(updateTodoList);
+    localStorage.setItem("todoList", JSON.stringify(updateTodoList));
   };
 
   const toogleTodo = (todoItem) => {
-    setTodoList(
-      todoList.map((todo) => {
-        if (todoItem === todo) todoItem.completed = !todoItem.completed;
-        return todo;
-      })
-    );
+    const updateTodoList = todoList.map((todo) => {
+      if (todoItem === todo) todoItem.completed = !todoItem.completed;
+      return todo;
+    });
+    setTodoList(updateTodoList);
+    localStorage.setItem("todoList", JSON.stringify(updateTodoList));
   };
 
   const deleteTodo = (todoItem) => {
-    setTodoList(todoList.filter((todo) => todo !== todoItem));
+    const updateTodoList = todoList.filter((todo) => todo !== todoItem);
+    setTodoList(updateTodoList);
+    localStorage.setItem("todoList", JSON.stringify(updateTodoList));
   };
 
   const clearCompletedTodos = () => {
-    setTodoList(todoList.filter((todo) => !todo.completed));
+    const updateTodoList = todoList.filter((todo) => !todo.completed);
+    setTodoList(updateTodoList);
+    localStorage.setItem("todoList", JSON.stringify(updateTodoList));
   };
 
   const changeTodoView = (view = null) => {
@@ -49,7 +65,7 @@ const App = () => {
           src={`${process.env.PUBLIC_URL}/images/bg-desktop-${
             themeIcon === "moon" ? "light" : "dark"
           }.jpg`}
-          alt="background image"
+          alt="background"
         />
       </div>
       <main>

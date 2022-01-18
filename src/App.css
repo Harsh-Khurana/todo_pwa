@@ -1,3 +1,4 @@
+/* NORMALIZING CSS */
 *,
 *::before,
 *::after {
@@ -7,25 +8,32 @@
   font-family: "Lato", sans-serif;
 }
 
+/* VARIABLES */
 :root {
   --clr-background: hsl(0, 0%, 98%);
   --clr-primary: white;
   --clr-secondary: hsl(236, 33%, 92%);
-  --clr-tertiary: hsl(236, 9%, 61%);
+  --clr-text: hsl(235, 25%, 30%);
   --light-grayish-blue: hsl(233, 11%, 84%);
   --dark-grayish-blue: hsl(236, 9%, 61%);
-  --very-dark-grayish-blue: hsl(235, 19%, 35%);
 }
 
 .dark-theme {
   --clr-background: hsl(235, 21%, 11%);
   --clr-primary: hsl(235, 24%, 19%);
   --clr-secondary: hsl(235, 19%, 35%);
-  --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+  --clr-text: hsl(233, 11%, 84%);
+  --very-dark-desaturated-blue: hsl(235, 23%, 22%);
 }
 
 body {
   background: var(--clr-background);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .top-image img {
@@ -36,16 +44,11 @@ body {
   width: 1800px;
   height: 250px;
 }
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 main {
   display: flex;
   flex-direction: column;
-  width: 60vh;
+  width: 50vw;
 }
 
 main h1 {
@@ -62,6 +65,14 @@ main h1 img {
   cursor: pointer;
 }
 
+/* TODO INPUT & LIST */
+.todoItems-wrapper {
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 5px 5px 1rem rgba(0, 0, 0, 0.1);
+}
+
 .todoItem {
   background-color: var(--clr-primary);
   outline: none;
@@ -71,16 +82,12 @@ main h1 img {
   border: none;
   display: flex;
   align-items: center;
-}
-.dark-theme .todoItem {
-  color: var(--light-grayish-blue);
+  color: var(--clr-text);
 }
 
-.todoItems-wrapper {
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 1rem;
-  box-shadow: 5px 5px 1rem rgba(0, 0, 0, 0.1);
+.todo-completed {
+  text-decoration: line-through;
+  color: var(--clr-secondary);
 }
 
 .todolist-container li:not(:last-child) {
@@ -99,15 +106,6 @@ main h1 img {
   cursor: pointer;
 }
 
-.todo-completed {
-  text-decoration: line-through;
-  color: var(--clr-secondary);
-}
-
-.dark-theme .todo-completed {
-  color: var(--very-dark-grayish-blue);
-}
-
 .todolist-container li.todo-completed .checkbox {
   background-image: linear-gradient(
     to bottom right,
@@ -121,6 +119,7 @@ main h1 img {
   cursor: pointer;
 }
 
+/* TODO FILTER */
 .todo-filter > * {
   color: var(--dark-grayish-blue);
   font-size: 0.7rem;
@@ -133,7 +132,7 @@ main h1 img {
 
 .todo-filter span:hover:not(:first-child),
 .todo-filter li:hover {
-  color: var(--very-dark-grayish-blue);
+  color: var(--clr-text);
 }
 
 .todo-filter {
@@ -145,6 +144,7 @@ main h1 img {
 .todo-filter ul {
   display: flex;
   list-style: none;
+  margin: 0 10px;
 }
 
 .todo-filter ul li:nth-child(2) {
@@ -152,21 +152,15 @@ main h1 img {
 }
 
 .todo-filter-active {
-  color: var(--very-dark-grayish-blue);
+  color: var(--clr-text);
 }
 
 @media (max-width: 500px) {
   main {
-    width: 50vh;
+    width: 90vw;
   }
 
   .top-image img {
     width: 1000px;
-  }
-}
-
-@media (max-width: 1400px) {
-  .top-image img {
-    width: 1400px;
   }
 }

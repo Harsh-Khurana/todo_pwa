@@ -1,6 +1,6 @@
 {
   "short_name": "Todo App",
-  "name": "Todo Progressive Web App",
+  "name": "Todo App PWA",
   "icons": [
     {
       "src": "/images/logo.png",

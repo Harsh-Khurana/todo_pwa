@@ -27,6 +27,7 @@
 }
 
 body {
+  height: 100vh;
   background: var(--clr-background);
 }
 
